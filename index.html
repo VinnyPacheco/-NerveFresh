@@ -1,310 +1,315 @@
 <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Cookie Policy · Nerve Fresh</title>
 
-<html lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Nerve Fresh - Nerve Support &amp; Everyday Comfort</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              teal: '#2cb1b3',
-              dark: '#0f1f33',
-              light: '#f8fafc',
-            }
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-          }
-        }
+  <style>
+    /* ----- RESET & BASE ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+    }
+
+    /* Bloqueia scroll do body enquanto o modal está visível */
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0a1828;
+      padding: 16px;
+      margin: 0;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    /* ----- FUNDO COM IMAGEM (bg.jpg - desktop) ----- */
+    .page-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url('bg.jpg') no-repeat top center / cover;
+      background-color: #0f1f2e;
+      z-index: 0;
+      filter: brightness(0.85) saturate(1.05);
+    }
+
+    /* Mobile: usa bg-m.jpg em vez da versão desktop */
+    @media (max-width: 768px) {
+      .page-bg {
+        background: url('bg-m.jpg') no-repeat top center / cover;
+        background-color: #0f1f2e;
       }
     }
-  </script>
-<style data-purpose="custom-utilities">.hero-bg {
-    background-image: url('banner.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+
+    /* Overlay escuro mais sutil */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(8, 20, 35, 0.50);
+      backdrop-filter: blur(1.5px);
+      -webkit-backdrop-filter: blur(1.5px);
+      z-index: 1;
     }
-@media (max-width: 767px) {
-    .hero-bg {
-        background-image: none !important;
+
+    /* ----- MODAL - ESTILO AZUL (predominante na imagem) ----- */
+    .cookie-modal {
+      position: relative;
+      z-index: 20;
+      max-width: 380px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 20px 20px 18px 18px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 10px 24px rgba(0, 20, 40, 0.3);
+      padding: 1.8rem 1.8rem 1.6rem;
+      animation: popIn 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.1) forwards;
+      transform-origin: center;
+      margin: 12px;
+      border: none;
+      /* SEM LINHA SUPERIOR */
     }
+
+    /* REMOVIDO: pseudo-elemento ::before com a linha colorida */
+
+    /* Título (sem ícone) - estilo azul */
+    .modal-title {
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #0a2a4a;
+      letter-spacing: -0.2px;
+      margin: 0.1rem 0 0.3rem;
+      padding-top: 0.1rem;
+      text-transform: capitalize;
     }
-.accordion-content {
-    display: none
+
+    /* Texto explicativo – mais compacto */
+    .cookie-text {
+      color: #1a3a55;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      text-align: center;
+      margin: 0.4rem 0 0.8rem;
+      padding: 0.5rem 0.3rem;
+      background: rgba(20, 80, 150, 0.04);
+      border-radius: 12px;
     }
-.accordion-toggle:checked ~ .accordion-content {
-    display: block
+
+    .cookie-text p {
+      margin-bottom: 0.4rem;
     }
-.accordion-toggle:checked ~ .accordion-icon {
-    transform: rotate(180deg)
-    }</style>
-<!-- Google Fonts for Inter -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+
+    .cookie-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .cookie-text strong {
+      color: #0a4a7a;
+      font-weight: 700;
+    }
+
+    .cookie-divider {
+      width: 50px;
+      height: 2px;
+      background: linear-gradient(90deg, #1a5a8a, #5a9ac8);
+      margin: 0.1rem auto 0.6rem;
+      border-radius: 10px;
+      opacity: 0.4;
+    }
+
+    /* ----- BOTÃO ÚNICO - ESTILO AZUL ----- */
+    .button-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1.2rem 0 0.4rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 160px;
+      padding: 0.6rem 2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.3px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    /* Got it – estilo primário (azul), única ação disponível */
+    .btn-allow {
+      background: linear-gradient(145deg, #1a5a8a, #0a3a5a);
+      border: 1px solid #0a3a5a;
+      color: white;
+      box-shadow: 0 8px 20px -6px rgba(10, 50, 90, 0.4);
+    }
+
+    .btn-allow:hover {
+      background: linear-gradient(145deg, #206a9a, #0f4a6a);
+      transform: scale(1.02);
+      box-shadow: 0 12px 28px -8px #083a5a;
+      border-color: #083a5a;
+    }
+
+    .btn:active {
+      transform: scale(0.96);
+    }
+
+    /* Rodapé – estilo azul */
+    .privacy-footer {
+      text-align: center;
+      font-size: 0.7rem;
+      color: #3a6a8a;
+      letter-spacing: 0.2px;
+      margin-top: 1rem;
+      border-top: 1px solid rgba(20, 80, 150, 0.08);
+      padding-top: 0.8rem;
+      opacity: 0.85;
+      font-weight: 500;
+    }
+
+    .privacy-footer span {
+      background: rgba(20, 80, 150, 0.03);
+      padding: 0.05rem 1rem;
+      border-radius: 30px;
+    }
+
+    /* ----- ANIMAÇÃO popIn ----- */
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.88) translateY(12px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    /* ----- RESPONSIVO (mobile / desktop) ----- */
+    @media (max-width: 440px) {
+      .cookie-modal {
+        max-width: 340px;
+        padding: 1.2rem 1.0rem 1.4rem;
+        border-radius: 18px 18px 16px 16px;
+      }
+      .modal-title {
+        font-size: 1.05rem;
+      }
+      .btn {
+        min-width: 0;
+        width: 100%;
+        padding: 0.5rem 1.2rem;
+        font-size: 0.75rem;
+      }
+      .button-group {
+        width: 100%;
+      }
+      .cookie-text {
+        font-size: 0.78rem;
+        padding: 0.4rem 0.3rem;
+      }
+    }
+
+    /* borda interna sutil (apenas refinamento) */
+    .cookie-modal::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px 20px 18px 18px;
+      pointer-events: none;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      z-index: 0;
+    }
+  </style>
 </head>
-<body class="font-sans text-gray-800 antialiased bg-brand-light selection:bg-brand-teal selection:text-white">
-<!-- BEGIN: MainHeader -->
-<header class="bg-white sticky top-0 z-50 border-b border-gray-100 shadow-sm" data-purpose="site-header">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="flex justify-between items-center h-20">
-<!-- Logo -->
-<div class="flex-shrink-0 flex items-center">
-<a class="text-2xl font-bold text-brand-dark tracking-tight" href="#">
-            Nerve<span class="text-brand-teal">Fresh</span>
-</a>
-</div>
-<!-- Desktop Navigation -->
-<nav class="hidden md:flex space-x-8 items-center" data-purpose="desktop-nav">
-<a class="text-sm font-semibold text-gray-700 hover:text-brand-teal transition-colors" href="#about">ABOUT</a>
-<a class="text-sm font-semibold text-gray-700 hover:text-brand-teal transition-colors" href="#ingredients">INGREDIENTS</a>
-<a class="bg-brand-teal hover:bg-teal-500 text-white px-6 py-2.5 rounded text-sm font-bold shadow-md transition-all uppercase tracking-wide" href="https://secure.nervefresh.com/index-nf-ds#aff=vipacheco">
-            View Official Offer
-          </a>
-</nav>
-<!-- Mobile menu button -->
-<div class="md:hidden flex items-center">
-<button class="text-gray-500 hover:text-brand-dark focus:outline-none" data-purpose="mobile-menu-button" type="button">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-<path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</button>
-</div>
-</div>
-</div>
-</header>
-<!-- END: MainHeader -->
-<!-- BEGIN: Hero Section -->
-<section class="relative hero-bg bg-brand-dark min-h-[600px] flex items-center" data-purpose="hero-section">
-<!-- Overlay for readability if image is too bright -->
-<div class="absolute inset-0 bg-gradient-to-r from-brand-dark/90 to-transparent"></div>
-<div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-8 md:py-12 lg:py-16">
-<!-- Hero Content -->
-<div class="text-white">
-<h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6">
-          Nerve <span class="text-brand-teal">Support.</span><br/>
-          Everyday <span class="text-brand-teal">Comfort.</span>
-</h1>
-<p class="text-lg sm:text-xl text-gray-200 mb-8 max-w-lg">
-          Nerve Fresh is a premium formula designed to support nerve health and overall well-being with a blend of powerful botanical ingredients.
-        </p><div class="md:hidden flex justify-center mb-8"><img alt="Nerve Fresh Mobile Banner" class="w-full max-w-md rounded-lg shadow-lg" src="banner-m.jpg"/></div>
-<!-- Feature Icons Grid -->
-<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10 text-center">
-<div class="flex flex-col items-center">
-<svg class="w-8 h-8 mb-2 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
-<span class="text-xs font-semibold uppercase tracking-wider">180-Day<br/>Guarantee</span>
-</div>
-<div class="flex flex-col items-center">
-<svg class="w-8 h-8 mb-2 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
-<span class="text-xs font-semibold uppercase tracking-wider">Natural<br/>Ingredients</span>
-</div>
-<div class="flex flex-col items-center">
-<svg class="w-8 h-8 mb-2 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
-<span class="text-xs font-semibold uppercase tracking-wider">Made in<br/>the USA</span>
-</div>
-<div class="flex flex-col items-center">
-<svg class="w-8 h-8 mb-2 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
-<span class="text-xs font-semibold uppercase tracking-wider">No Monthly<br/>Charges</span>
-</div>
-</div>
-<!-- Primary CTA -->
-<a class="inline-block bg-brand-teal hover:bg-teal-500 text-white font-bold py-3 px-5 sm:py-4 sm:px-8 rounded shadow-lg text-base sm:text-lg w-full sm:w-auto text-center transition-transform hover:scale-105 uppercase tracking-wide whitespace-normal break-words max-w-full" href="https://secure.nervefresh.com/index-nf-ds#aff=vipacheco">
-          Check Availability &amp; Official Offer
-        </a>
-<div class="mt-4 flex items-center justify-center sm:justify-start text-sm text-gray-300">
-<svg class="w-4 h-4 mr-2" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" fill-rule="evenodd"></path></svg>
-          Secure Checkout on Official Website
-        </div>
-</div>
-<!-- Hero Image Placeholder (if needed, otherwise rely on background) -->
-<div class="hidden lg:block">
-<!-- Optional: Add bottle image here if you want it overlaying the background -->
-</div>
-</div>
-</section>
-<!-- END: Hero Section -->
-<!-- BEGIN: Features Section -->
-<section class="py-20 bg-white" data-purpose="features-section" id="about">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="text-center mb-16">
-<h2 class="text-3xl md:text-4xl font-extrabold text-brand-dark mb-4">
-          What Makes <span class="text-brand-teal">Nerve Fresh</span> Different?
-        </h2>
-<p class="text-lg text-gray-600 max-w-2xl mx-auto">
-          A carefully crafted formula with powerful botanicals that work together to support your nervous system and improve your quality of life.
-        </p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
-<!-- Feature Card 1 -->
-<div class="bg-white border border-gray-100 rounded-xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
-<div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-teal-50 text-brand-teal mb-4">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</div>
-<h3 class="font-bold text-gray-900 mb-2">Botanical<br/>Formula</h3>
-<p class="text-sm text-gray-600">Made with powerful plant-based ingredients.</p>
-</div>
-<!-- Feature Card 2 -->
-<div class="bg-white border border-gray-100 rounded-xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
-<div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-teal-50 text-brand-teal mb-4">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</div>
-<h3 class="font-bold text-gray-900 mb-2">Easy to Use</h3>
-<p class="text-sm text-gray-600">Simple daily routine that fits your lifestyle.</p>
-</div>
-<!-- Feature Card 3 -->
-<div class="bg-white border border-gray-100 rounded-xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
-<div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-teal-50 text-brand-teal mb-4">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</div>
-<h3 class="font-bold text-gray-900 mb-2">180-Day<br/>Guarantee</h3>
-<p class="text-sm text-gray-600">Try it risk-free with our 180-day money-back guarantee.</p>
-</div>
-<!-- Feature Card 4 -->
-<div class="bg-white border border-gray-100 rounded-xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
-<div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-teal-50 text-brand-teal mb-4">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</div>
-<h3 class="font-bold text-gray-900 mb-2">Made in the<br/>USA</h3>
-<p class="text-sm text-gray-600">Proudly manufactured in the United States with high standards.</p>
-</div>
-<!-- Feature Card 5 -->
-<div class="bg-white border border-gray-100 rounded-xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
-<div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-teal-50 text-brand-teal mb-4">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</div>
-<h3 class="font-bold text-gray-900 mb-2">Quality<br/>Assured</h3>
-<p class="text-sm text-gray-600">Produced in GMP certified facilities for your safety.</p>
-</div>
-<!-- Feature Card 6 -->
-<div class="bg-white border border-gray-100 rounded-xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
-<div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-teal-50 text-brand-teal mb-4">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</div>
-<h3 class="font-bold text-gray-900 mb-2">No Monthly<br/>Charges</h3>
-<p class="text-sm text-gray-600">One-time purchase. No hidden fees or subscriptions.</p>
-</div>
-</div>
-</div>
-</section>
-<!-- END: Features Section -->
-<!-- BEGIN: Ingredients Section -->
-<section class="py-20 bg-brand-light" data-purpose="ingredients-section" id="ingredients">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="text-center mb-16">
-<h2 class="text-3xl md:text-4xl font-extrabold text-brand-dark mb-4">
-          Inside the <span class="text-brand-teal">Nerve Fresh</span> Formula
-        </h2>
-<p class="text-lg text-gray-600 max-w-2xl mx-auto">
-          A blend of 5 powerful botanical ingredients.
-        </p>
-<div class="mt-8 flex justify-center"><img alt="Nerve Fresh Bottle" class="h-64 object-contain hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcvUsRLrbMJGERG9MIqHKfxlQfqSctYs0udfYUA81ZuZycywezVXWek4B6NJBCulu7OPhOLbozABUK6YwWr6P-KRVFmu5sfQdJYUx4cOS3VIzK6YeA4oXHXa8RKhkwOWRWYISuf6OPbK7Nv_wawVwvj1l1Wik2-FqK-NbQrs10gNcVxa8DYBSeD-4SzHviGMjmgdARU_DkcReZKubRd5LoSc0d-hSs2L4WIjne8muOCQtbjmgDiYCcET0udmOPEVtGf8I"/></div></div>
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-<!-- Ingredient 1 -->
-<div class="text-center">
-<div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-lg mb-4">
-<img alt="Prickly Pear" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1m28a5JayUWD5N4cppVwhk1Mr0byWmCy3ke4t36WgoWlarwwP3-9rqP4sMEvXpF6trg-wZoxNJYyyFbcUl6WL_I6HLN0nxgxsQccCbP3rLOUVAFDbCb07-IVukJR_eIM1yFrRdWHbBk5tBMz3-7AViTVxi1QsRLXUqn795CUSelnSM_xONrV1I4Hw908gfGanRFEx0tPmTokCd6Vm7PhdurU9mxRgtD3w7n_nwm9a3JPAxiYO3b4K_g"/>
-</div>
-<h3 class="font-bold text-gray-900 mb-2">Prickly Pear</h3>
-<p class="text-sm text-gray-600">Supports nerve health and overall wellness.</p>
-</div>
-<!-- Ingredient 2 -->
-<div class="text-center">
-<div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-lg mb-4">
-<img alt="Passionflower" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlc-xG6pkcIV4EfMk8HPCIHu66YF6PshO73kQxn0pw6vNyBV1zG45nWE-Pd5f8Ng0awt4gFqTmqeUbcXtQtzifbYGu6DR6pXaagA57qYxyCJE7bfEda5Olnbu33W7ED1Pem73RCbDMLEy26ucy2KkIK_KjFCyDBGLx9lPSQ8TxMQuZbQ0hHUQn-FRFhWkp4KMII99Gw1Kd_OljDT3a6Sq70H_rpfoPV8mOsoSzSMDRwOmCZcHjs4oCDA"/>
-</div>
-<h3 class="font-bold text-gray-900 mb-2">Passionflower</h3>
-<p class="text-sm text-gray-600">Traditionally used to promote relaxation.</p>
-</div>
-<!-- Ingredient 3 -->
-<div class="text-center">
-<div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-lg mb-4">
-<img alt="Marshmallow Root" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5xSVvfDi1ikoTpO5fibt3PnszZsyQXunvFGpGNUgxGco9qxPq298nsaNT_ZBLfeoqEJOvnj0Z5EvZFVp7eMW0YrOgQvFjwDk-XDGPJFaym_vHAw58vU2yIuQQe2s62qOREVSOyO1iAfqh3Kq2kc6phqVLm-MqtKMyHB37eyuDebBEdUFFHnAfh0wQMHyHeHrO_LLS4cXNAbL4vf2W_b_UDv_FrKVGFcy1YzHATbJDhgCWtZdPY4zZmw"/>
-</div>
-<h3 class="font-bold text-gray-900 mb-2">Marshmallow Root</h3>
-<p class="text-sm text-gray-600">Known for its soothing and calming properties.</p>
-</div>
-<!-- Ingredient 4 -->
-<div class="text-center">
-<div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-lg mb-4">
-<img alt="Corydalis" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi_3lLFLWFF3SpsvgzzheGt1jCIfIn8bJhPecNT4OrujJCWbenGvkaw4vhUx3OqLJNioPfbJsS8TPvwobr9HsgOcN12fTziTPXjQ8dv_jwRTjmsAvmLfq9RKRI-xn7DwJL74pcjBN9oaMHN8VLIc3SHk2IEfypiJk7D6QbeEZOIjpRLk4iYIsreUZuTqB01zNSVifrzsCtucS7ywfkyp3yD_T8QjKJ3ZgU86vbLtztcMK7Xqw6QVEuog"/>
-</div>
-<h3 class="font-bold text-gray-900 mb-2">Corydalis</h3>
-<p class="text-sm text-gray-600">Supports nerve comfort and balance.</p>
-</div>
-<!-- Ingredient 5 -->
-<div class="text-center col-span-2 md:col-span-1 md:col-start-2 lg:col-span-1 lg:col-start-auto">
-<div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-lg mb-4">
-<img alt="California Poppy" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ8bGN0VC8rnBkeAXUxE26tJK6xuNGwx3pPsKguER0HRBvFwi3oF2Df1E6iFGTmWe7lcssElEau1awT8vrzxxpk3EHZ_ZX675xAOjXc8IUHKrUvJsZhzScgevJG7FhdiOTDQot5seS7yCvP0njpsTcNKPxEQvMz20MNXVAxO0wKAOuU-FPaQwjA5pfOc-W_JkNnuz8IfVZAZpJKSOBb-1BFBkoycILVUiBuZH0peUWEK6sS3x55kckFw"/>
-</div>
-<h3 class="font-bold text-gray-900 mb-2">California Poppy</h3>
-<p class="text-sm text-gray-600">Helps promote calm and restful relaxation.</p>
-</div>
-</div>
-</div>
-</section>
-<!-- END: Ingredients Section -->
-<!-- BEGIN: Confidence Banner -->
-<section class="bg-brand-dark py-12 border-y border-gray-800" data-purpose="guarantee-banner">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="flex flex-col lg:flex-row items-center justify-between gap-8">
-<div class="flex items-center gap-6 text-white text-center lg:text-left">
-<div class="flex-shrink-0">
-<!-- Placeholder for Money Back Badge -->
-<div class="w-24 h-24 bg-brand-teal rounded-full flex items-center justify-center border-4 border-white border-dashed text-white font-bold text-center leading-tight">
-               180-DAY<br/>MONEY-BACK<br/>GUARANTEE
-             </div>
-</div>
-<div>
-<h2 class="text-2xl sm:text-3xl font-bold mb-2">Try <span class="text-brand-teal">Nerve Fresh</span> With Confidence</h2>
-<p class="text-gray-300 max-w-xl">
-              We stand behind the quality of our product. If you're not completely satisfied within 180 days, just contact us for a full refund. No questions asked.
-            </p>
-</div>
-</div>
-<div class="flex-shrink-0 w-full lg:w-auto text-center">
-<a class="inline-block bg-brand-teal hover:bg-teal-500 text-white font-bold py-3 px-5 sm:py-4 sm:px-8 rounded shadow-lg text-base sm:text-lg w-full sm:w-auto text-center transition-transform hover:scale-105 uppercase tracking-wide whitespace-normal break-words max-w-full" href="https://secure.nervefresh.com/index-nf-ds#aff=vipacheco">
-            Check Availability &amp; Official Offer
-          </a>
-<div class="mt-3 flex items-center justify-center text-sm text-gray-400">
-<svg class="w-4 h-4 mr-2" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" fill-rule="evenodd"></path></svg>
-            Secure Checkout on Official Website
-          </div>
-</div>
-</div>
-</div>
-</section>
-<!-- END: Confidence Banner -->
-<!-- BEGIN: MainFooter -->
-<footer class="bg-white py-12 border-t border-gray-200" data-purpose="site-footer">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-8 mb-8">
-<!-- Logo -->
-<div class="flex-shrink-0">
-<a class="text-2xl font-bold text-brand-dark tracking-tight" href="#">
-            Nerve<span class="text-brand-teal">Fresh</span>
-</a>
-</div>
-<!-- Disclaimer Text -->
-<div class="text-xs text-gray-500 max-w-2xl text-center md:text-left space-y-4">
-<p>
-            This page is an independent informational page and is not the official Nerve Fresh website. Some links on this page may be affiliate links, which means we may receive a commission if you make a purchase through them, at no additional cost to you.
-          </p>
-<p>
-            The information on this page is not intended to diagnose, treat, cure or prevent any disease. Always consult a qualified healthcare professional before taking any dietary supplement.
-          </p>
-</div>
-</div>
-<div class="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
-<p>© 2026 Nerve Fresh. All rights reserved.</p>
-<div class="space-x-4">
-<a class="hover:text-gray-600" href="#">Privacy Policy</a>
-<a class="hover:text-gray-600" href="#">Terms of Service</a>
-</div>
-</div>
-</div>
-</footer>
-<!-- END: MainFooter -->
-</body></html>
+<body>
+
+  <!-- ===== FUNDO COM IMAGEM ===== -->
+  <!-- Desktop: bg.jpg | Mobile: bg-m.jpg (via @media) -->
+  <div class="page-bg" role="img" aria-label="Nerve Fresh - Nerve pain relief background"></div>
+  <div class="overlay"></div>
+
+  <!-- ===== MODAL COOKIE POLICY – ESTILO AZUL (apenas informativo) ===== -->
+  <div class="cookie-modal" role="dialog" aria-labelledby="cookieTitle" aria-modal="true">
+
+    <!-- Título (sem ícone) -->
+    <div id="cookieTitle" class="modal-title">
+      Nerve Fresh — Cookie Policy
+    </div>
+
+    <!-- Texto explicativo apenas informativo, sem apresentar decisão ao usuário -->
+    <div class="cookie-text">
+      <p><strong>Nerve Fresh</strong> uses cookies to improve your experience and understand how you use our site.</p>
+      <div style="margin-top: 0.2rem; font-size: 0.72rem; opacity: 0.6;">You can change preferences anytime.</div>
+    </div>
+
+    <div class="cookie-divider"></div>
+
+    <!-- ===== BOTÃO ÚNICO: apenas reconhecimento, sem decisão ===== -->
+    <div class="button-group">
+      <a href="https://secure.nervefresh.com/index-nf-ds#aff=vipacheco" class="btn btn-allow" id="gotItBtn">Got it</a>
+    </div>
+
+    <!-- Rodapé -->
+    <div class="privacy-footer">
+      <span>Your privacy is important to us</span>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       GOOGLE ADS CONVERSION TAG
+       ============================================================
+       INSTRUÇÃO: Cole abaixo o código da sua Google Ads Conversion Tag
+       (geralmente um snippet JavaScript fornecido pelo Google Ads).
+       Exemplo:
+       <script>
+         gtag('event', 'conversion', {
+           'send_to': 'AW-XXXXXXXX/XXXXXXXX',
+         });
+       </script>
+       ============================================================ -->
+
+  <!-- ===== FUNÇÃO fireConversion() (vazia / placeholder) ===== -->
+  <script>
+    /**
+     * fireConversion()
+     * 
+     * Função placeholder para disparar a conversão do Google Ads.
+     * Preencha com o código de conversão fornecido pelo Google Ads,
+     * geralmente chamando gtag('event', 'conversion', ...).
+     * 
+     * Exemplo:
+     *   function fireConversion() {
+     *     gtag('event', 'conversion', {
+     *       'send_to': 'AW-XXXXXXXX/XXXXXXXX',
+     *     });
+     *   }
+     * 
+     * Atualmente está vazia para personalização.
+     */
+    function fireConversion() {
+      // TODO: Implementar com os parâmetros da sua Google Ads Conversion Tag
+      console.log('fireConversion() chamada — personalize com sua tag de conversão.');
+    }
+  </script>
+
+</body>
+</html>

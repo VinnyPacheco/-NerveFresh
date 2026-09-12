@@ -72,7 +72,7 @@
       height: 100vh;
     }
 
-    /* ----- FUNDO COM IMAGEM — SEM DESFOQUE ----- */
+    /* ----- FUNDO COM IMAGEM — SEM CLIQUE ----- */
     .page-bg {
       position: fixed;
       top: 0;
@@ -83,6 +83,7 @@
       background-color: #0f1f2e;
       z-index: 0;
       filter: brightness(0.9) saturate(1.05);
+      cursor: default;
     }
 
     @media (max-width: 768px) {
@@ -92,7 +93,7 @@
       }
     }
 
-    /* Overlay — escurecimento progressivo (entrada) */
+    /* Overlay — escurecimento progressivo */
     .overlay {
       position: fixed;
       top: 0;
@@ -102,6 +103,7 @@
       background: rgba(8, 20, 35, 0);
       z-index: 1;
       animation: darkenIn 0.8s cubic-bezier(0.25, 0.8, 0.35, 1) forwards;
+      pointer-events: none;
     }
 
     @keyframes darkenIn {
@@ -109,17 +111,7 @@
       100% { background: rgba(8, 20, 35, 0.35); }
     }
 
-    /* Overlay — saída: clareia rápido (0.4s, ease-in) */
-    .overlay.exit {
-      animation: lightenOut 0.4s ease-in forwards;
-    }
-
-    @keyframes lightenOut {
-      0%   { background: rgba(8, 20, 35, 0.35); }
-      100% { background: rgba(8, 20, 35, 0); }
-    }
-
-    /* ----- MODAL ----- */
+    /* ----- MODAL (cor #43C7CA) — largura 380px ----- */
     .cookie-modal {
       position: relative;
       z-index: 20;
@@ -135,16 +127,7 @@
       transform-origin: center;
       margin: 12px;
       border: none;
-    }
-
-    /* Modal — saída: desce direto (0.4s, ease-in) */
-    .cookie-modal.exit {
-      animation: slideDownExit 0.4s ease-in forwards;
-    }
-
-    @keyframes slideDownExit {
-      0%   { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(100vh); }
+      cursor: default;
     }
 
     /* Botão "X" */
@@ -171,14 +154,14 @@
     }
 
     .modal-close:hover {
-      background: rgba(70, 201, 203, 0.10);
+      background: rgba(67, 199, 202, 0.10);
       opacity: 1;
       transform: scale(1.08);
     }
 
     .modal-close:active { transform: scale(0.94); }
 
-    /* Título */
+    /* Título — tom escuro (#2A9A9E) */
     .modal-title {
       text-align: center;
       font-size: 1.25rem;
@@ -198,64 +181,59 @@
       text-align: center;
       margin: 0.4rem 0 0.8rem;
       padding: 0.5rem 0.3rem;
-      background: rgba(70, 201, 203, 0.04);
+      background: rgba(67, 199, 202, 0.04);
       border-radius: 12px;
     }
 
     .cookie-text p { margin-bottom: 0.3rem; }
     .cookie-text p:last-child { margin-bottom: 0; }
-    .cookie-text strong { color: #46C9CB; font-weight: 700; }
+    .cookie-text strong { color: #43C7CA; font-weight: 700; }
 
-    .cookie-divider {
-      width: 50px;
-      height: 2px;
-      background: linear-gradient(90deg, #46C9CB, #7ADADD);
-      margin: 0.1rem auto 0.6rem;
-      border-radius: 10px;
-      opacity: 0.4;
-    }
-
-    /* Botões */
+    /* Botões — empilhados (um em cima do outro) */
     .button-group {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 10px 12px;
-      margin: 1.2rem 0 0.4rem;
+      gap: 10px;
+      margin: 1.2rem 0 0.2rem;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 100px;
-      padding: 0.55rem 1.6rem;
+      min-width: 0;
+      width: 100%;
+      padding: 0.6rem 1.2rem;
       border-radius: 50px;
       font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.3px;
+      font-size: 0.8rem;
+      letter-spacing: 0.2px;
       text-decoration: none;
       transition: all 0.15s ease;
       border: 1px solid transparent;
       cursor: pointer;
-      flex: 1 1 auto;
+      text-align: center;
+      white-space: nowrap;
     }
 
+    /* Accept & Continue — primário (#43C7CA) */
     .btn-primary {
-      background: linear-gradient(145deg, #46C9CB, #2A9A9E);
+      background: linear-gradient(145deg, #43C7CA, #2A9A9E);
       border: 1px solid #2A9A9E;
       color: white;
-      box-shadow: 0 8px 20px -6px rgba(70, 201, 203, 0.4);
+      box-shadow: 0 8px 20px -6px rgba(67, 199, 202, 0.4);
     }
 
     .btn-primary:hover {
-      background: linear-gradient(145deg, #56D9DB, #34AAAE);
+      background: linear-gradient(145deg, #54D7DA, #34AAAE);
       transform: scale(1.02);
       box-shadow: 0 12px 28px -8px #1F7A7E;
       border-color: #1F7A7E;
     }
 
+    /* Continue Without Sharing — neutro */
     .btn-secondary {
       background: #f0f5f5;
       border: 1px solid #c8dada;
@@ -278,14 +256,14 @@
       color: #3a7a7a;
       letter-spacing: 0.2px;
       margin-top: 1rem;
-      border-top: 1px solid rgba(70, 201, 203, 0.08);
+      border-top: 1px solid rgba(67, 199, 202, 0.08);
       padding-top: 0.8rem;
       opacity: 0.85;
       font-weight: 500;
     }
 
     .privacy-footer span {
-      background: rgba(70, 201, 203, 0.03);
+      background: rgba(67, 199, 202, 0.03);
       padding: 0.05rem 1rem;
       border-radius: 30px;
     }
@@ -298,8 +276,7 @@
     }
 
     /* ============================================================
-       SPINNER DE CARREGAMENTO — aparece ao clicar em qualquer botão
-       Fica centralizado na tela e cobre tudo com um leve fundo escuro
+       SPINNER DE CARREGAMENTO — cor principal #43C7CA
     ============================================================ */
     .loading-overlay {
       position: fixed;
@@ -315,27 +292,25 @@
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+      pointer-events: none;
     }
 
-    /* Quando ativo: aparece com fade-in suave */
     .loading-overlay.active {
       opacity: 1;
       visibility: visible;
       transition: opacity 0.3s ease, visibility 0s linear 0s;
     }
 
-    /* Anel giratório com a cor da marca */
     .loading-spinner {
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      border: 4px solid rgba(70, 201, 203, 0.2);
-      border-top-color: #46C9CB;
-      border-right-color: #46C9CB;
+      border: 4px solid rgba(67, 199, 202, 0.2);
+      border-top-color: #43C7CA;
+      border-right-color: #43C7CA;
       animation: spin 0.9s linear infinite;
-      box-shadow: 0 8px 24px rgba(70, 201, 203, 0.25);
-      /* pequena animação de "respiro" enquanto gira */
-      filter: drop-shadow(0 0 12px rgba(70, 201, 203, 0.4));
+      box-shadow: 0 8px 24px rgba(67, 199, 202, 0.3);
+      filter: drop-shadow(0 0 12px rgba(67, 199, 202, 0.5));
     }
 
     @keyframes spin {
@@ -386,18 +361,10 @@
 
       .cookie-text p { margin-bottom: 0.3rem; }
 
-      .cookie-divider {
-        width: 34px;
-        height: 2px;
-        margin: 0.2rem auto 0.4rem;
-        flex-shrink: 0;
-      }
-
       .button-group {
         gap: 10px;
         margin: 0.6rem 0 0;
         flex-direction: column;
-        flex-wrap: nowrap;
         width: 100%;
         flex-shrink: 0;
       }
@@ -406,8 +373,7 @@
         min-width: 0;
         width: 100%;
         padding: 0.55rem 1rem;
-        font-size: 0.8rem;
-        flex: none;
+        font-size: 0.75rem;
         white-space: nowrap;
         border-radius: 40px;
       }
@@ -481,20 +447,18 @@
       <div style="margin-top: 0.15rem; font-size: 0.75rem; opacity: 0.6; line-height: 1.4;">You can change preferences anytime.</div>
     </div>
 
-    <div class="cookie-divider"></div>
-
     <div class="button-group">
       <a href="https://secure.nervefresh.com/index-nf-ds?cookies=yes#aff=vp0290"
          class="btn btn-primary"
          id="gotItBtn"
          onclick="return gtag_report_conversion(this.href)">
-        Got it
+        Accept &amp; Continue
       </a>
       <a href="https://secure.nervefresh.com/index-nf-ds?cookies=declined#aff=vp0290"
          class="btn btn-secondary"
          id="noThanksBtn"
          onclick="return gtag_report_conversion(this.href)">
-        No, thanks
+        Continue Without Sharing
       </a>
     </div>
 
@@ -504,7 +468,7 @@
   </div>
 
   <!-- ============================================================
-    SPINNER DE CARREGAMENTO — aparece ao clicar em qualquer botão
+    SPINNER DE CARREGAMENTO
   ============================================================ -->
   <div class="loading-overlay" id="loadingOverlay" aria-hidden="true">
     <div class="loading-spinner" role="status" aria-label="Loading"></div>
@@ -512,40 +476,26 @@
 
   <!-- ============================================================
     🔴 GOOGLE ADS — EVENTO DE CONVERSÃO
-    Ao clicar: pixel + animação + spinner + navegação EM PARALELO.
   ============================================================ -->
   <script>
     function gtag_report_conversion(url) {
-      // Evita múltiplos cliques/redirecionamentos duplicados
       if (window.__redirecting) return false;
       window.__redirecting = true;
 
       var finalUrl = appendGclidToUrl(url);
-
-      var modal = document.querySelector('.cookie-modal');
-      var overlay = document.querySelector('.overlay');
       var loadingOverlay = document.getElementById('loadingOverlay');
 
-      // Dispara o pixel de conversão do Google Ads imediatamente
       gtag('event', 'conversion', {
         'send_to': 'AW-18423452005/QPuvCOfilewcEOWi_tBE',
         'transaction_id': ''
       });
 
-      // Dispara as animações de saída do modal e do overlay
-      if (modal) modal.classList.add('exit');
-      if (overlay) overlay.classList.add('exit');
-
-      // Mostra o spinner com fade-in suave (aparece sobre a animação)
       if (loadingOverlay) {
-        // Pequeno atraso para o spinner aparecer depois do início da saída do modal
         setTimeout(function () {
           loadingOverlay.classList.add('active');
         }, 120);
       }
 
-      // Redireciona em paralelo — o navegador começa a carregar a nova
-      // página enquanto a atual ainda renderiza a animação + spinner
       window.location.href = finalUrl;
 
       return false;
